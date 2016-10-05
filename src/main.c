@@ -50,6 +50,22 @@ void Delay(__IO uint32_t time);
 int main(void)
 {
 
+  RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOC,ENABLE);
+
+  //GPIO nastavime na vystup
+  GPIOA->MODER|=(uint32_t)0b01<<(5*2);
+
+  //GPIO nastavime na PushPull
+  GPIOA->OTYPER&=~(uint32_t)0b1<<5;
+
+  //GPIO nastavime na PullUp
+  GPIOA->PUPDR&=~(uint32_t)0b1<<(5*2+1);
+  GPIOA->PUPDR|=(uint32_t)0b1<<(5*2);
+
+  //GPIO nastavime na HighSpeed
+  GPIOA->OSPEEDR|=(uint32_t)0b1<<(5*2+1);
+  GPIOA->OSPEEDR&=~(uint32_t)0b1<<(5*2);
+
 
   /**
   *  IMPORTANT NOTE!
