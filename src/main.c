@@ -93,9 +93,12 @@ int main(void)
   while (1)
   {
 	   // zapnutie LED pomocou registra ODR
-	   GPIOA->ODR|=(uint32_t)0b1<<5;
+	   //GPIOA->ODR|=(uint32_t)0b1<<5;
 	   // vypnutie LED pomocou registra ODR
-	   GPIOA->ODR&=~(uint32_t)0b1<<5;
+	   //GPIOA->ODR&=~(uint32_t)0b1<<5;
+	  //nastavime bit pomocou registra BSRR
+	   GPIOA->BSRRL|=(uint16_t)0b01<<(5);
+	   GPIOA->BSRRH|=(uint16_t)0b01<<(5);
 
   }
   return 0;
