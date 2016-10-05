@@ -66,6 +66,9 @@ int main(void)
   GPIOA->OSPEEDR|=(uint32_t)0b1<<(5*2+1);
   GPIOA->OSPEEDR&=~(uint32_t)0b1<<(5*2);
 
+
+
+
   /**
   *  IMPORTANT NOTE!
   *  See the <system_*.c> file and how/if the SystemInit() function updates 
@@ -89,7 +92,10 @@ int main(void)
   /* Infinite loop */
   while (1)
   {
-
+	   // zapnutie LED pomocou registra ODR
+	   GPIOA->ODR|=(uint32_t)0b1<<5;
+	   // vypnutie LED pomocou registra ODR
+	   GPIOA->ODR&=~(uint32_t)0b1<<5;
 
   }
   return 0;
