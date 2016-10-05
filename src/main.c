@@ -50,6 +50,10 @@ void Delay(__IO uint32_t time);
 int main(void)
 {
 
+  uint8_t BUTTON = 0;
+  uint8_t pushed = 0;
+  uint8_t push_count = 0,condition_count = 10;
+
   GPIO_InitTypeDef gpioInitStr;
 
   RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOC,ENABLE);
@@ -112,6 +116,20 @@ int main(void)
 	  //GPIOA->BSRRH|=(uint16_t)0b01<<(5);
 	  //Prepínanie stavu LED pomocou ODR
 	  //GPIOA->ODR^=(uint32_t)0b01<<5;
+
+	  for (int i = 0;i<condition_count;i++){
+		  	  //ak je stlacene tlacidlo PC13
+	  		  if ((GPIOC->IDR & ((uint32_t)(1<<13))) == 0){
+	  			  push_count++;
+	  			  if (push_count>condition_count){
+	  			  BUTTON = 1;
+
+	  			  }
+	  		  }
+	  		  else
+	  			  BUTTON = 0;
+
+	  	  }
 
   }
   return 0;
