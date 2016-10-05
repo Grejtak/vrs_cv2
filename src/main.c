@@ -50,7 +50,7 @@ void Delay(__IO uint32_t time);
 int main(void)
 {
 
-  RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOC,ENABLE);
+  RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOA,ENABLE);
 
   //GPIO nastavime na vystup
   GPIOA->MODER|=(uint32_t)0b01<<(5*2);
@@ -65,7 +65,6 @@ int main(void)
   //GPIO nastavime na HighSpeed
   GPIOA->OSPEEDR|=(uint32_t)0b1<<(5*2+1);
   GPIOA->OSPEEDR&=~(uint32_t)0b1<<(5*2);
-
 
   /**
   *  IMPORTANT NOTE!
