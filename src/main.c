@@ -50,8 +50,19 @@ void Delay(__IO uint32_t time);
 int main(void)
 {
 
-  RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOA,ENABLE);
+  GPIO_InitTypeDef gpioInitStr;
 
+  RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOC,ENABLE);
+  gpioInitStr.GPIO_Mode = GPIO_Mode_IN;
+  gpioInitStr.GPIO_OType = GPIO_OType_PP;
+  gpioInitStr.GPIO_PuPd = GPIO_PuPd_NOPULL;
+
+
+  GPIO_Init(GPIOC,&gpioInitStr);
+
+
+  /*
+  //RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOA,ENABLE);
   //GPIO nastavime na vystup
   GPIOA->MODER|=(uint32_t)0b01<<(5*2);
 
@@ -65,7 +76,7 @@ int main(void)
   //GPIO nastavime na HighSpeed
   GPIOA->OSPEEDR|=(uint32_t)0b1<<(5*2+1);
   GPIOA->OSPEEDR&=~(uint32_t)0b1<<(5*2);
-
+  */
 
 
 
@@ -100,7 +111,7 @@ int main(void)
 	  //GPIOA->BSRRL|=(uint16_t)0b01<<(5);
 	  //GPIOA->BSRRH|=(uint16_t)0b01<<(5);
 	  //Prepínanie stavu LED pomocou ODR
-	  GPIOA->ODR^=(uint32_t)0b01<<5;
+	  //GPIOA->ODR^=(uint32_t)0b01<<5;
 
   }
   return 0;
