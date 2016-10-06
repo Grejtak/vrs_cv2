@@ -52,7 +52,7 @@ int main(void)
 
   uint8_t BUTTON = 0;
   uint8_t pushed = 0;
-  uint8_t push_count = 0,condition_count = 10;
+  uint8_t push_count = 0,push_count2 = 0, condition_count = 3;
 
 
   GPIO_InitTypeDef gpioInitStr;
@@ -144,11 +144,19 @@ int main(void)
 	  	 	  		  if ((GPIOC->IDR & ((uint32_t)(1<<13))) == 0){
 	  	 	  			  push_count++;
 	  	 	  			  if (push_count>condition_count){
-	  	 	  			  GPIOA->BSRRL|=(uint16_t)0b01<<(5);
+	  	 	  				BUTTON = 1;
 	  	 	  			  }
 	  	 	  		  }
-	  	 	  		  else
-	  	 	  		  	  GPIOA->BSRRH|=(uint16_t)0b01<<(5);
+	  	 	  		  if (BUTTON == 1){
+	  	 	  			  if ((GPIOC->IDR & ((uint32_t)(1<<13))) != 0){
+	  	 	  				  push_count2++;
+	  	 	  				  if (push_count2>condition_count){
+	  	 	  					  GPIOA->ODR^=(uint32_t)0b1<<5;
+	  	 	  					  BUTTON = 0;
+	  	 	  				  }
+	  	 	  			  }
+	  	 	  		  }
+
 	  	  }
 
 
