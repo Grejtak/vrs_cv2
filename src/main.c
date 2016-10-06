@@ -145,6 +145,7 @@ int main(void)
 	  	 	  			  push_count++;
 	  	 	  			  if (push_count>condition_count){
 	  	 	  				BUTTON = 1;
+	  	 	  				push_count = 0;
 	  	 	  			  }
 	  	 	  		  }
 	  	 	  		  if (BUTTON == 1){
@@ -153,6 +154,7 @@ int main(void)
 	  	 	  				  if (push_count2>condition_count){
 	  	 	  					  GPIOA->ODR^=(uint32_t)0b1<<5;
 	  	 	  					  BUTTON = 0;
+	  	 	  					  push_count2 = 0;
 	  	 	  				  }
 	  	 	  			  }
 	  	 	  		  }
