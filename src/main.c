@@ -134,9 +134,22 @@ int main(void)
 
 	  	  }
 		*/
+	  /*
 	  //blikanie LED pomocou casovaca resp. for cyklu
 	  GPIOA->ODR^=(uint32_t)0b1<<5;
 	  for(int i = 0; i < 500000; i++);
+	 */
+	  for (int i = 0;i<condition_count;i++){
+	  	 		  	  //ak je stlacene tlacidlo PC13
+	  	 	  		  if ((GPIOC->IDR & ((uint32_t)(1<<13))) == 0){
+	  	 	  			  push_count++;
+	  	 	  			  if (push_count>condition_count){
+	  	 	  			  GPIOA->BSRRL|=(uint16_t)0b01<<(5);
+	  	 	  			  }
+	  	 	  		  }
+	  	 	  		  else
+	  	 	  		  	  GPIOA->BSRRH|=(uint16_t)0b01<<(5);
+	  	  }
 
 
   }
