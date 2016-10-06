@@ -54,6 +54,7 @@ int main(void)
   uint8_t pushed = 0;
   uint8_t push_count = 0,condition_count = 10;
 
+
   GPIO_InitTypeDef gpioInitStr;
 
   RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOC,ENABLE);
@@ -64,8 +65,9 @@ int main(void)
 
   GPIO_Init(GPIOC,&gpioInitStr);
 
+  RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOA,ENABLE);
 
-  /*
+
   //RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOA,ENABLE);
   //GPIO nastavime na vystup
   GPIOA->MODER|=(uint32_t)0b01<<(5*2);
@@ -80,7 +82,7 @@ int main(void)
   //GPIO nastavime na HighSpeed
   GPIOA->OSPEEDR|=(uint32_t)0b1<<(5*2+1);
   GPIOA->OSPEEDR&=~(uint32_t)0b1<<(5*2);
-  */
+
 
 
 
@@ -115,8 +117,9 @@ int main(void)
 	  //GPIOA->BSRRL|=(uint16_t)0b01<<(5);
 	  //GPIOA->BSRRH|=(uint16_t)0b01<<(5);
 	  //Prepínanie stavu LED pomocou ODR
-	  //GPIOA->ODR^=(uint32_t)0b01<<5;
+	  //GPIOA->ODR^=(uint32_t)0b1<<5;
 
+	  /*
 	  for (int i = 0;i<condition_count;i++){
 		  	  //ak je stlacene tlacidlo PC13
 	  		  if ((GPIOC->IDR & ((uint32_t)(1<<13))) == 0){
@@ -130,6 +133,11 @@ int main(void)
 	  			  BUTTON = 0;
 
 	  	  }
+		*/
+	  //blikanie LED pomocou casovaca resp. for cyklu
+	  GPIOA->ODR^=(uint32_t)0b1<<5;
+	  for(int i = 0; i < 500000; i++);
+
 
   }
   return 0;
